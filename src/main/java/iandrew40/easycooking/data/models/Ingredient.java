@@ -15,12 +15,11 @@ public class Ingredient extends BaseEntity {
     @Column(name = "quantity")
     private String quantity;
 
-    @ManyToMany //(mappedBy = "ingredients")
+    @ManyToMany(mappedBy = "ingredients")
     private List<Recipe> recipes;
 
     public Ingredient() {
     }
-
 
     public String getName() {
         return this.name;

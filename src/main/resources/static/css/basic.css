@@ -11,8 +11,10 @@ body {
 }
 
 #logo{
-    height: 160%;
+    height: 130%;
     position: absolute;
+    margin-bottom: 0;
+    padding: 0;
 }
 
 #profile {
