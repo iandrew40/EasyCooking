@@ -1,0 +1,40 @@
+<header>
+    <nav class="navbar navbar-expand-lg bg-dark">
+        <input class="navbar-brand" type="image" src="/image/logo-orange.png" id="logo">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <th:block th:if="${session.user == null}">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav row">
+                    <li class="nav-item col-xs"><input type="text" id="searchIndex" placeholder="Search.."></li>
+                    <li class="nav-item col-xs"><a href="/user/register" class="nav-link">Register</a></li>
+                    <li class="nav-item col-xs"><a href="/user/login" class="nav-link">Login</a></li>
+                </ul>
+            </div>
+        </th:block>
+        <th:block th:unless="${session.user == null}">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav row">
+                    <li class="nav-item col-xs"><input type="text" id="searchLoggedIn" placeholder="Search.."></li>
+                    <li class="nav-item col-xs">
+                        <div class="dropdown">
+                            <input type="image" src="/image/profile.png" id="profile" class="dropbtn"
+                                   onclick="myFunction()">
+                            <div id="myDropdown" class="dropdown-content">
+                                <a href="/user/profile.html">My Profile</a>
+                                <a href="#about">FAVOURITE</a>
+                                <a href="#">My Recipes</a>
+                                <a href="/recipe/create-recipe">Add Recipe</a>
+                                <a href="#contact">My Posts</a>
+                                <a href="/post/create-post.html">Add Post</a>
+                                <a href="#">Log out</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </th:block>
+    </nav>
+</header>
