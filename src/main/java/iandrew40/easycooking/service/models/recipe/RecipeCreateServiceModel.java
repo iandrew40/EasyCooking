@@ -9,7 +9,7 @@ public class RecipeCreateServiceModel {
 
     private String name;
     private String category;
-    private List<Ingredient> ingredients;
+    private List<String> ingredients;
     private LocalDate dateAdded;
     private String user;
 
@@ -32,11 +32,11 @@ public class RecipeCreateServiceModel {
         this.category = category;
     }
 
-    public List<Ingredient> getIngredients() {
+    public List<String> getIngredients() {
         return this.ingredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
+    public void setIngredients(List<String> ingredients) {
         this.ingredients = ingredients;
     }
 

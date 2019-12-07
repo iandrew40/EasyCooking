@@ -15,7 +15,7 @@ public class Ingredient extends BaseEntity {
     @Column(name = "quantity")
     private String quantity;
 
-    @ManyToMany(mappedBy = "ingredients")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "ingredients")
     private List<Recipe> recipes;
 
     public Ingredient() {

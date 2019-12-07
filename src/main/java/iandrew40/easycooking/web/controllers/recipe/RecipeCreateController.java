@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/recipe")
@@ -61,16 +62,20 @@ public class RecipeCreateController {
         ingredients.add(recipeCreateModel.getIngredient19());
         ingredients.add(recipeCreateModel.getIngredient20());
 
-        List<Ingredient> obj = (List)ingredients;
-
-
+        //Here we remove all empty ingredients.
+        for (int i = 19; i >= 0; i--) {
+            if (ingredients.get(i).equals("")){
+            ingredients.remove(i);
+            }
+        }
 
         RecipeCreateServiceModel recipeCreateServiceModel = this.modelMapper
                 .map(recipeCreateModel, RecipeCreateServiceModel.class);
+
+        recipeCreateServiceModel.setIngredients(ingredients);
+
         recipeCreateService.create(recipeCreateServiceModel);
 
-        recipeCreateServiceModel.setIngredients(obj);
-        System.out.println();
         return "redirect:/";
     }
 }
