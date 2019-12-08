@@ -12,4 +12,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, String> {
     Recipe findFirstByName(String name);
 
     List<Recipe> findAllByCategory(String categoryName);
+
+    Recipe getByName(String name);
+
 }

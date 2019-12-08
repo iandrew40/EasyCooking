@@ -7,6 +7,32 @@
 <th:block th:include="~{_shared/head.html}"/>
 <body>
 <th:block th:include="~{_shared/header.html}"/>
-
+<div class="container">
+    <div>
+        <div>
+            <h1 th:text="${recipe.name}"></h1>
+        </div>
+        <div>
+            <img src="">
+        </div>
+        <div>
+            <p th:text="${recipe.rating}">Rating: </p>
+            <p th:text="${recipe.views}">Views: </p>
+        </div>
+    </div>
+    <div>
+        <h2>Ingredients:</h2>
+        <ul>
+            <tr th:each="ingredient: ${recipe.ingredients}">
+                <td th:text="${ingredient.name}"/>
+            </tr>
+        </ul>
+    </div>
+    <div>
+        <h2>How to prepare:</h2>
+        <p th:text="${recipe.howToPrepare}"></p>
+    </div>
+    <p th:text="${recipe.dateAdded}"></p>
+</div>
 </body>
 </html>

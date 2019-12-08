@@ -5,11 +5,12 @@ import iandrew40.easycooking.data.models.Recipe;
 import iandrew40.easycooking.data.repositories.IngredientRepository;
 import iandrew40.easycooking.data.repositories.RecipeRepository;
 import iandrew40.easycooking.service.models.recipe.RecipeCreateServiceModel;
+import iandrew40.easycooking.service.models.recipe.RecipeViewServiceModel;
+import iandrew40.easycooking.service.services._shared.DateService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,20 +20,34 @@ public class RecipeCreateServiceImpl implements RecipeCreateService {
     private final ModelMapper modelMapper;
     private final RecipeRepository recipeRepository;
     private final IngredientRepository ingredientRepository;
+    private final DateService dateService;
 
 
     @Autowired
-    public RecipeCreateServiceImpl(ModelMapper modelMapper, RecipeRepository recipeRepository, IngredientRepository ingredientRepository) {
+    public RecipeCreateServiceImpl(ModelMapper modelMapper, RecipeRepository recipeRepository, IngredientRepository ingredientRepository, DateService dateService) {
         this.modelMapper = modelMapper;
         this.recipeRepository = recipeRepository;
         this.ingredientRepository = ingredientRepository;
+        this.dateService = dateService;
+    }
+
+    @Override
+    public RecipeViewServiceModel getRecipeByName(String name) {
+
+        Recipe recipeFound = this.recipeRepository.getByName(name);
+
+        RecipeViewServiceModel recipeServiceModel = this.modelMapper
+                .map(recipeFound, RecipeViewServiceModel.class);
+
+
+        return recipeServiceModel;
     }
 
     @Override
     public void create(RecipeCreateServiceModel recipeCreateServiceModel) {
 
 
-        recipeCreateServiceModel.setDateAdded(LocalDate.now());
+        recipeCreateServiceModel.setDateAdded(this.dateService.getCurrentDate());
         //recipeCreateServiceModel.setUser(); //get it from session
 
 

@@ -7,6 +7,17 @@
 <th:block th:include="~{_shared/head.html}"/>
 <body>
 <th:block th:include="~{_shared/header.html}"/>
-
+<form th:action="@{/post/create-post}" th:object="${model}" method="post">
+    <div>
+        <label for="name">Post name</label>
+        <input type="text" id="name" name="name"/>
+    </div>
+    <div>
+        <textarea name="content" id="content" rows="50" cols="150"></textarea>
+    </div>
+    <div>
+        <button type="submit">Create</button>
+    </div>
+</form>
 </body>
 </html>

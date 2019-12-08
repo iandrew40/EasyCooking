@@ -1,34 +1,47 @@
 package iandrew40.easycooking.web.controllers.recipe;
 
-import iandrew40.easycooking.data.models.Ingredient;
 import iandrew40.easycooking.service.models.recipe.RecipeCreateServiceModel;
+import iandrew40.easycooking.service.models.recipe.RecipeViewServiceModel;
 import iandrew40.easycooking.service.services.recipe.RecipeCreateService;
 import iandrew40.easycooking.web.models.recipe.RecipeCreateModel;
+import iandrew40.easycooking.web.models.recipe.RecipeViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/recipe")
-public class RecipeCreateController {
+public class RecipeController {
 
     private final ModelMapper modelMapper;
     private final RecipeCreateService recipeCreateService;
 
     @Autowired
-    public RecipeCreateController(ModelMapper modelMapper, RecipeCreateService recipeCreateService) {
+    public RecipeController(ModelMapper modelMapper, RecipeCreateService recipeCreateService) {
         this.modelMapper = modelMapper;
         this.recipeCreateService = recipeCreateService;
     }
+
+
+    @GetMapping("/details/{recipe}")
+    public ModelAndView getViewRecipe(@PathVariable String recipe, ModelAndView modelAndView){
+        RecipeViewServiceModel recipeServiceModel = this.recipeCreateService.getRecipeByName(recipe);
+
+        RecipeViewModel recipeViewModel = this.modelMapper
+                .map(recipeServiceModel, RecipeViewModel.class);
+        modelAndView.addObject("recipe", recipeViewModel);
+        modelAndView.setViewName("recipe/view-recipe.html");
+
+        return modelAndView;
+    }
+
+
 
     @GetMapping("/create-recipe")
     public String getCreateRecipe(Model model){
@@ -62,7 +75,7 @@ public class RecipeCreateController {
         ingredients.add(recipeCreateModel.getIngredient19());
         ingredients.add(recipeCreateModel.getIngredient20());
 
-        //Here we remove all empty ingredients.
+        //Here we remove all empty fields from ingredients list.
         for (int i = 19; i >= 0; i--) {
             if (ingredients.get(i).equals("")){
             ingredients.remove(i);
