@@ -33,7 +33,6 @@ public class UserRegisterServiceImpl implements UserRegisterService {
 
         registerServiceModel.setPassword(this.hashingService.hashPassword(registerServiceModel.getPassword()));
         registerServiceModel.setSex(registerServiceModel.getSex().toUpperCase());
-        registerServiceModel.setStatus(registerServiceModel.getStatus().toUpperCase());
 
         User user = this.modelMapper.map(registerServiceModel, User.class);
         this.userRepository.save(user);

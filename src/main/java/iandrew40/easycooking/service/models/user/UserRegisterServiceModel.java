@@ -9,7 +9,6 @@ public class UserRegisterServiceModel {
     private String country;
     private Integer age;
     private String sex;
-    private String status;
 
     public UserRegisterServiceModel() {
     }
@@ -70,11 +69,4 @@ public class UserRegisterServiceModel {
         this.sex = sex;
     }
 
-    public String getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }

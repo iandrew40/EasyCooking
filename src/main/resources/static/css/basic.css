@@ -77,6 +77,24 @@ body {
     background-color: rgba(255, 255, 255, 0.7);
 }
 
+.box-register{
+    width: 333px;
+    height: 571px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    margin: 0 auto;
+    position: relative;
+}
+
+.box-login{
+    width: 333px;
+    height: 220px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    margin: 0 auto;
+    position: relative;
+}
+
 #recipePicture{
     display: block;
     padding-left: 30px;

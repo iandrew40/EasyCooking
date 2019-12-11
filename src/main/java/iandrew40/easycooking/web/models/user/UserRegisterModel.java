@@ -10,7 +10,7 @@ public class UserRegisterModel {
     private String country;
     private Integer age;
     private String sex;
-    private String status;
+
 
     public UserRegisterModel() {
     }
@@ -71,11 +71,4 @@ public class UserRegisterModel {
         this.sex = sex;
     }
 
-    public String getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }
