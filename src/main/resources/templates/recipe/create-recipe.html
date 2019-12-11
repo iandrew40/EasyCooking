@@ -8,100 +8,131 @@
 <body>
 <th:block th:include="~{_shared/header.html}"/>
 <form th:action="@{/recipe/create-recipe}" th:object="${model}" method="post">
-    <div>
-        <label for="name">name</label>
-        <input type="text" id="name" name="name"/>
-    </div>
-    <div>
-        <label for="category">category</label>
-        <input type="text" id="category" name="category"/>
-    </div>
-    <div>
-        <p>Ingredients: </p>
-        <ul>
-            <li>
-                <label for="ingredient1">ingredient1</label>
-                <input type="text" id="ingredient1" name="ingredient1"/>
-            </li>
-            <li>
-                <label for="ingredient2">ingredient2</label>
-                <input type="text" id="ingredient2" name="ingredient2"/>
-            </li>
-            <li>
-                <label for="ingredient3">ingredient3:</label>
-                <input type="text" id="ingredient3" name="ingredient3"/>
-            </li>
-            <li>
-                <label for="ingredient4">ingredient4:</label>
-                <input type="text" id="ingredient4" name="ingredient4"/>
-            </li>
-            <li><label for="ingredient5">ingredient5:</label>
-                <input type="text" id="ingredient5" name="ingredient5"/>
-            </li>
-            <li>
-                <label for="ingredient6">ingredient6:</label>
-                <input type="text" id="ingredient6" name="ingredient6"/>
-            </li>
-            <li>
-                <label for="ingredient7">ingredient7:</label>
-                <input type="text" id="ingredient7" name="ingredient7"/>
-            </li>
-            <li>
-                <label for="ingredient8">ingredient8:</label>
-                <input type="text" id="ingredient8" name="ingredient8"/>
-            </li>
-            <li>
-                <label for="ingredient9">ingredient9:</label>
-                <input type="text" id="ingredient9" name="ingredient9"/>
-            </li>
-            <li>
-                <label for="ingredient10">ingredient10:</label>
-                <input type="text" id="ingredient10" name="ingredient10"/>
-            </li>
-            <li>
-                <label for="ingredient11">ingredient11:</label>
-                <input type="text" id="ingredient11" name="ingredient11"/>
-            </li>
-            <li>
-                <label for="ingredient12">ingredient12:</label>
-                <input type="text" id="ingredient12" name="ingredient12"/>
-            </li>
-            <li>
-                <label for="ingredient13">ingredient13:</label>
-                <input type="text" id="ingredient13" name="ingredient13"/>
-            </li>
-            <li>
-                <label for="ingredient14">ingredient14:</label>
-                <input type="text" id="ingredient14" name="ingredient14"/>
-            </li>
-            <li>
-                <label for="ingredient15">ingredient15:</label>
-                <input type="text" id="ingredient15" name="ingredient15"/>
-            </li>
-            <li>
-                <label for="ingredient16">ingredient16:</label>
-                <input type="text" id="ingredient16" name="ingredient16"/>
-            </li>
-            <li>
-                <label for="ingredient17">ingredient17:</label>
-                <input type="text" id="ingredient17" name="ingredient17"/>
-            </li>
-            <li>
-                <label for="ingredient18">ingredient18:</label>
-                <input type="text" id="ingredient18" name="ingredient18"/>
-            </li>
-            <li>
-                <label for="ingredient19">ingredient19:</label>
-                <input type="text" id="ingredient19" name="ingredient19"/>
-            </li>
-            <li>
-                <label for="ingredient20">ingredient20:</label>
-                <input type="text" id="ingredient20" name="ingredient20"/>
-            </li>
-        </ul>
-    </div>
-    <div>
-        <button type="submit">Create</button>
+    <div class="container-fluid">
+        <div class="box my-3">
+            <div class="row">
+                <h1 class="col-sm-12 col-lg-7 text-center py-2">Create recipe</h1>
+            </div>
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="text-left pl-5 ml-1">
+                        <div>
+                            <label for="name">name</label>
+                            <input type="text" id="name" name="name"/>
+                        </div>
+                        <div>
+                            <label for="category">category</label>
+                            <input type="text" id="category" name="category"/>
+                        </div>
+                        <div>
+                            <label for="picture">add picture</label>
+                            <input type="text" id="picture" name="picture"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <h2 class="col-xl-12 text-center pb-4">Ingredients: </h2>
+                    <div class="col-xl-6 float-left">
+                        <ul class="list-unstyled ">
+                            <li>
+                                <label for="ingredient1">ingredient1</label>
+                                <input type="text" id="ingredient1" name="ingredient1"/>
+                            </li>
+                            <li>
+                                <label for="ingredient2">ingredient2</label>
+                                <input type="text" id="ingredient2" name="ingredient2"/>
+                            </li>
+                            <li>
+                                <label for="ingredient3">ingredient3:</label>
+                                <input type="text" id="ingredient3" name="ingredient3"/>
+                            </li>
+                            <li>
+                                <label for="ingredient4">ingredient4:</label>
+                                <input type="text" id="ingredient4" name="ingredient4"/>
+                            </li>
+                            <li><label for="ingredient5">ingredient5:</label>
+                                <input type="text" id="ingredient5" name="ingredient5"/>
+                            </li>
+                            <li>
+                                <label for="ingredient6">ingredient6:</label>
+                                <input type="text" id="ingredient6" name="ingredient6"/>
+                            </li>
+                            <li>
+                                <label for="ingredient7">ingredient7:</label>
+                                <input type="text" id="ingredient7" name="ingredient7"/>
+                            </li>
+                            <li>
+                                <label for="ingredient8">ingredient8:</label>
+                                <input type="text" id="ingredient8" name="ingredient8"/>
+                            </li>
+                            <li>
+                                <label for="ingredient9">ingredient9:</label>
+                                <input type="text" id="ingredient9" name="ingredient9"/>
+                            </li>
+                            <li>
+                                <label for="ingredient10">ingredient10:</label>
+                                <input type="text" id="ingredient10" name="ingredient10"/>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-6 float-right">
+                        <ul class="list-unstyled">
+                            <li>
+                                <label for="ingredient11">ingredient11:</label>
+                                <input type="text" id="ingredient11" name="ingredient11"/>
+                            </li>
+                            <li>
+                                <label for="ingredient12">ingredient12:</label>
+                                <input type="text" id="ingredient12" name="ingredient12"/>
+                            </li>
+                            <li>
+                                <label for="ingredient13">ingredient13:</label>
+                                <input type="text" id="ingredient13" name="ingredient13"/>
+                            </li>
+                            <li>
+                                <label for="ingredient14">ingredient14:</label>
+                                <input type="text" id="ingredient14" name="ingredient14"/>
+                            </li>
+                            <li>
+                                <label for="ingredient15">ingredient15:</label>
+                                <input type="text" id="ingredient15" name="ingredient15"/>
+                            </li>
+                            <li>
+                                <label for="ingredient16">ingredient16:</label>
+                                <input type="text" id="ingredient16" name="ingredient16"/>
+                            </li>
+                            <li>
+                                <label for="ingredient17">ingredient17:</label>
+                                <input type="text" id="ingredient17" name="ingredient17"/>
+                            </li>
+                            <li>
+                                <label for="ingredient18">ingredient18:</label>
+                                <input type="text" id="ingredient18" name="ingredient18"/>
+                            </li>
+                            <li>
+                                <label for="ingredient19">ingredient19:</label>
+                                <input type="text" id="ingredient19" name="ingredient19"/>
+                            </li>
+                            <li>
+                                <label for="ingredient20">ingredient20:</label>
+                                <input type="text" id="ingredient20" name="ingredient20"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <label for="howToPrepare">Add instructions for preparing the recipe</label>
+                    <input type="text" id="howToPrepare" name="howToPrepare"/>
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                <div class="col-lg-3">
+                    <button class="btn btn-info" type="submit">Create Recipe</button>
+                </div>
+            </div>
+        </div>
     </div>
 </form>
 </body>

@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +53,7 @@ public class RecipeController {
     }
 
     @PostMapping("/create-recipe")
-    public String createRecipe(@ModelAttribute RecipeCreateModel recipeCreateModel){
+    public String createRecipe(@ModelAttribute RecipeCreateModel recipeCreateModel, HttpServletRequest request){
 
         List<String> ingredients = new ArrayList<>();
         ingredients.add(recipeCreateModel.getIngredient1());
@@ -86,6 +88,9 @@ public class RecipeController {
                 .map(recipeCreateModel, RecipeCreateServiceModel.class);
 
         recipeCreateServiceModel.setIngredients(ingredients);
+
+        String principal = request.getUserPrincipal().getName();
+        recipeCreateServiceModel.setUser(principal);
 
         recipeCreateService.create(recipeCreateServiceModel);
 

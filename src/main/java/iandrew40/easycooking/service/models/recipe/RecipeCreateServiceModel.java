@@ -11,6 +11,7 @@ public class RecipeCreateServiceModel {
     private String category;
     private List<String> ingredients;
     private LocalDate dateAdded;
+    private String howToPrepare;
     private String user;
 
     public RecipeCreateServiceModel() {
@@ -46,6 +47,14 @@ public class RecipeCreateServiceModel {
 
     public void setDateAdded(LocalDate dateAdded) {
         this.dateAdded = dateAdded;
+    }
+
+    public String getHowToPrepare() {
+        return this.howToPrepare;
+    }
+
+    public void setHowToPrepare(String howToPrepare) {
+        this.howToPrepare = howToPrepare;
     }
 
     public String getUser() {

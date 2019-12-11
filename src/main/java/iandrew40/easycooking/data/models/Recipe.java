@@ -22,15 +22,18 @@ public class Recipe extends BaseEntity {
     @Column(name = "category", nullable = false)
     private String category;
 
-    @Column(name = "date_added")
+    @Column(name = "date_added", nullable = false)
     private LocalDate dateAdded;
+
+    @Column(name = "howToPrepare", nullable = false)
+    private String howToPrepare;
 
     //TODO check relation with favourite_recipe and created_recipe try to add @JoinColumn here one after the other
 
     @ManyToOne
     private User user;
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(
             name = "recipes_ingredients",
             joinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"),
@@ -86,6 +89,15 @@ public class Recipe extends BaseEntity {
 
     public void setDateAdded(LocalDate dateAdded) {
         this.dateAdded = dateAdded;
+    }
+
+
+    public String getHowToPrepare() {
+        return this.howToPrepare;
+    }
+
+    public void setHowToPrepare(String howToPrepare) {
+        this.howToPrepare = howToPrepare;
     }
 
 

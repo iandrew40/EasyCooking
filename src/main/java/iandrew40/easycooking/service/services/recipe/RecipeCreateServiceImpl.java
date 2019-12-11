@@ -36,11 +36,9 @@ public class RecipeCreateServiceImpl implements RecipeCreateService {
 
         Recipe recipeFound = this.recipeRepository.getByName(name);
 
-        RecipeViewServiceModel recipeServiceModel = this.modelMapper
+
+        return this.modelMapper
                 .map(recipeFound, RecipeViewServiceModel.class);
-
-
-        return recipeServiceModel;
     }
 
     @Override
@@ -48,7 +46,6 @@ public class RecipeCreateServiceImpl implements RecipeCreateService {
 
 
         recipeCreateServiceModel.setDateAdded(this.dateService.getCurrentDate());
-        //recipeCreateServiceModel.setUser(); //get it from session
 
 
         //Here we convert the list of Strings to list of Ingredients
@@ -64,14 +61,22 @@ public class RecipeCreateServiceImpl implements RecipeCreateService {
         recipe.setIngredients(ingredients);
 
         for (Ingredient ingredient : ingredients) {
-            if (this.ingredientRepository.findByName(ingredient.getName()) == null){
-            this.ingredientRepository.save(ingredient);
+
+
+            if (this.ingredientRepository.findByName(ingredient.getName()) == null) {
+                this.ingredientRepository.saveAndFlush(ingredient);
+            } else {
+
+                //Here we take the ingredient from the db and add the new recipe to it's list of Recipes
+                Ingredient temp = this.ingredientRepository.findByName(ingredient.getName());
+                List<Recipe> allRecipesForIng = temp.getRecipes();
+                allRecipesForIng.add(recipe);
+                temp.setRecipes(allRecipesForIng);
+                this.ingredientRepository.saveAndFlush(temp);
             }
         }
 
-
-        System.out.println();
-        this.recipeRepository.save(recipe);
+        this.recipeRepository.saveAndFlush(recipe);
 
     }
 

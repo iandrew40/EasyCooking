@@ -24,6 +24,8 @@ public class RecipeCreateModel {
     private String ingredient18;
     private String ingredient19;
     private String ingredient20;
+    private String howToPrepare;
+
 
 
 
@@ -205,5 +207,13 @@ public class RecipeCreateModel {
 
     public void setIngredient20(String ingredient20) {
         this.ingredient20 = ingredient20;
+    }
+
+    public String getHowToPrepare() {
+        return this.howToPrepare;
+    }
+
+    public void setHowToPrepare(String howToPrepare) {
+        this.howToPrepare = howToPrepare;
     }
 }

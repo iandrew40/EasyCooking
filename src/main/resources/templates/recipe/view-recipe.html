@@ -7,32 +7,47 @@
 <th:block th:include="~{_shared/head.html}"/>
 <body>
 <th:block th:include="~{_shared/header.html}"/>
-<div class="container">
-    <div>
-        <div>
-            <h1 th:text="${recipe.name}"></h1>
+<div class="container-fluid">
+    <div class="box my-3">
+        <!----------------------------------------------------------->
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center col-4" th:text="${recipe.name}">Pizza</h1>
+            </div>
         </div>
-        <div>
-            <img src="">
+        <!----------------------------------------------------------->
+        <div class="row">
+            <div class="col-sm-12 col-xl-6">
+                <div>
+                    <img src="/image/pizza.jpeg" id="recipePicture">
+                </div>
+                <div class="col-xl-12">
+                    <p id="rating" class="col-xl-3  d-inline-block"> <!--th:text="${recipe.rating}"-->Rating: 5/5</p>
+                    <p id="views" class="col-xl-3 d-inline-block"> <!--th:text="${recipe.views}"-->Views: 18066</p>
+                    <p id="dateAdded" class="col-xl-4 d-inline-block" th:text="${recipe.dateAdded}"> Date added: </p>
+                    <input type="image" class="col-xl-3 d-inline-block" id="loveButton"
+                           src="/image/love-button.png"/>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xl-6">
+                <h2 class="text-center col-xl-10">Ingredients:</h2>
+                <ol class="col-xl-10" id="ingredientsList">
+                    <tr th:each="ingredient: ${recipe.ingredients}">
+                        <li>
+                            <td th:text="${ingredient.name}"/>
+                        </li>
+                </ol>
+            </div>
         </div>
-        <div>
-            <p th:text="${recipe.rating}">Rating: </p>
-            <p th:text="${recipe.views}">Views: </p>
+        <!----------------------------------------------------------->
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center">How to prepare:</h2>
+                <p th:text="${recipe.howToPrepare}"></p>
+            </div>
         </div>
+
     </div>
-    <div>
-        <h2>Ingredients:</h2>
-        <ul>
-            <tr th:each="ingredient: ${recipe.ingredients}">
-                <td th:text="${ingredient.name}"/>
-            </tr>
-        </ul>
-    </div>
-    <div>
-        <h2>How to prepare:</h2>
-        <p th:text="${recipe.howToPrepare}"></p>
-    </div>
-    <p th:text="${recipe.dateAdded}"></p>
 </div>
 </body>
 </html>
