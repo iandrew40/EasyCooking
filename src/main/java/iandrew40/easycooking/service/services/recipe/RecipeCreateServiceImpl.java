@@ -7,6 +7,7 @@ import iandrew40.easycooking.data.repositories.RecipeRepository;
 import iandrew40.easycooking.service.models.recipe.RecipeCreateServiceModel;
 import iandrew40.easycooking.service.models.recipe.RecipeViewServiceModel;
 import iandrew40.easycooking.service.services._shared.DateService;
+import iandrew40.easycooking.web.models.recipe.RecipeCreateModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,42 @@ public class RecipeCreateServiceImpl implements RecipeCreateService {
     }
 
     @Override
+    public List<String> addIngredientsToListAndRemoveEmptyEntries(RecipeCreateModel model) {
+        List<String> ingredients = new ArrayList<>();
+
+        ingredients.add(model.getIngredient1());
+        ingredients.add(model.getIngredient2());
+        ingredients.add(model.getIngredient3());
+        ingredients.add(model.getIngredient4());
+        ingredients.add(model.getIngredient5());
+        ingredients.add(model.getIngredient6());
+        ingredients.add(model.getIngredient7());
+        ingredients.add(model.getIngredient8());
+        ingredients.add(model.getIngredient9());
+        ingredients.add(model.getIngredient10());
+        ingredients.add(model.getIngredient11());
+        ingredients.add(model.getIngredient12());
+        ingredients.add(model.getIngredient13());
+        ingredients.add(model.getIngredient14());
+        ingredients.add(model.getIngredient15());
+        ingredients.add(model.getIngredient16());
+        ingredients.add(model.getIngredient17());
+        ingredients.add(model.getIngredient18());
+        ingredients.add(model.getIngredient19());
+        ingredients.add(model.getIngredient20());
+
+        //Here we remove all empty fields from ingredients list.
+        for (int i = 19; i >= 0; i--) {
+            if (ingredients.get(i).equals("")){
+            ingredients.remove(i);
+            }
+        }
+
+        return ingredients;
+
+    }
+
+    @Override
     public RecipeViewServiceModel getRecipeByName(String name) {
 
         Recipe recipeFound = this.recipeRepository.getByName(name);
@@ -51,30 +88,27 @@ public class RecipeCreateServiceImpl implements RecipeCreateService {
         //Here we convert the list of Strings to list of Ingredients
         List<Ingredient> ingredients = new ArrayList<>();
         for (String s : recipeCreateServiceModel.getIngredients()) {
-            Ingredient ing = new Ingredient();
-            ing.setName(s);
-            ingredients.add(ing);
+
+            if (this.ingredientRepository.findByName(s) == null) {
+
+                Ingredient ing = new Ingredient();
+                ing.setName(s);
+                ingredients.add(ing);
+                this.ingredientRepository.saveAndFlush(ing);
+
+            } else {
+
+                Ingredient ing = this.ingredientRepository.findByName(s);
+                ingredients.add(ing);
+                this.ingredientRepository.saveAndFlush(ing);
+            }
+
         }
 
 
         Recipe recipe = this.modelMapper.map(recipeCreateServiceModel, Recipe.class);
         recipe.setIngredients(ingredients);
 
-        for (Ingredient ingredient : ingredients) {
-
-
-            if (this.ingredientRepository.findByName(ingredient.getName()) == null) {
-                this.ingredientRepository.saveAndFlush(ingredient);
-            } else {
-
-                //Here we take the ingredient from the db and add the new recipe to it's list of Recipes
-                Ingredient temp = this.ingredientRepository.findByName(ingredient.getName());
-                List<Recipe> allRecipesForIng = temp.getRecipes();
-                allRecipesForIng.add(recipe);
-                temp.setRecipes(allRecipesForIng);
-                this.ingredientRepository.saveAndFlush(temp);
-            }
-        }
 
         this.recipeRepository.saveAndFlush(recipe);
 
