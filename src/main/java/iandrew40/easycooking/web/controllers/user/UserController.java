@@ -1,7 +1,8 @@
 package iandrew40.easycooking.web.controllers.user;
 
 import iandrew40.easycooking.service.models.user.UserRegisterServiceModel;
-import iandrew40.easycooking.service.services.user.UserRegisterService;
+import iandrew40.easycooking.service.services.user.UserService;
+import iandrew40.easycooking.web.models.user.UserLoginModel;
 import iandrew40.easycooking.web.models.user.UserRegisterModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/user")
-public class UserRegisterController {
+public class UserController {
 
     private final ModelMapper modelMapper;
-    private final UserRegisterService userRegisterService;
+    private final UserService userService;
 
     @Autowired
-    public UserRegisterController(ModelMapper modelMapper, UserRegisterService userRegisterService) {
+    public UserController(ModelMapper modelMapper, UserService userService) {
         this.modelMapper = modelMapper;
-        this.userRegisterService = userRegisterService;
+        this.userService = userService;
     }
 
     @GetMapping("/register")
@@ -34,11 +35,22 @@ public class UserRegisterController {
 
     @PostMapping("/register")
     public String register(@ModelAttribute UserRegisterModel registerModel){
+        if (!registerModel.getPassword().equals(registerModel.getConfirmPassword())){
+            return "user/register.html";
+        }
 
         UserRegisterServiceModel serviceModel = this.modelMapper.map(registerModel, UserRegisterServiceModel.class);
-        userRegisterService.register(serviceModel);
 
-        return "redirect:/";
+        this.userService.register(serviceModel);
+
+
+        return "redirect:/user/login";
     }
 
+    @GetMapping("/login")
+    public String getLoginForm(Model model){
+        model.addAttribute("model", new UserLoginModel());
+
+        return "user/login.html";
+    }
 }

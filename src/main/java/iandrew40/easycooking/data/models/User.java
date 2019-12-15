@@ -2,14 +2,17 @@ package iandrew40.easycooking.data.models;
 
 import iandrew40.easycooking.data.models.base.BaseEntity;
 import iandrew40.easycooking.data.models.enums.Sex;
-import iandrew40.easycooking.data.models.enums.Status;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity {
+public class User extends BaseEntity implements UserDetails {
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
@@ -29,8 +32,11 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    @ManyToMany
+    @JoinTable(name = "users_roles",
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Set<Role> authorities;
 
     @JoinTable(
             name = "users_posts",
@@ -73,6 +79,30 @@ public class User extends BaseEntity {
         return this.username;
     }
 
+    @Override
+    @Transient
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    @Transient
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    @Transient
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    @Transient
+    public boolean isEnabled() {
+        return true;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -84,6 +114,16 @@ public class User extends BaseEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    public void setAuthorities(Set<Role> authorities) {
+        this.authorities = authorities;
     }
 
 
@@ -120,15 +160,6 @@ public class User extends BaseEntity {
 
     public void setSex(Sex sex) {
         this.sex = sex;
-    }
-
-
-    public Status getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
     }
 
 

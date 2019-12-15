@@ -1,5 +1,7 @@
 package iandrew40.easycooking.service.models.user;
 
+import java.util.Set;
+
 public class UserRegisterServiceModel {
 
     private String username;
@@ -9,6 +11,7 @@ public class UserRegisterServiceModel {
     private String country;
     private Integer age;
     private String sex;
+    private Set<RoleServiceModel> authorities;
 
     public UserRegisterServiceModel() {
     }
@@ -69,4 +72,11 @@ public class UserRegisterServiceModel {
         this.sex = sex;
     }
 
+    public Set<RoleServiceModel> getAuthorities() {
+        return this.authorities;
+    }
+
+    public void setAuthorities(Set<RoleServiceModel> authorities) {
+        this.authorities = authorities;
+    }
 }

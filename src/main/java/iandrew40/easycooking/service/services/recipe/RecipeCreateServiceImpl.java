@@ -2,11 +2,14 @@ package iandrew40.easycooking.service.services.recipe;
 
 import iandrew40.easycooking.data.models.Ingredient;
 import iandrew40.easycooking.data.models.Recipe;
+import iandrew40.easycooking.data.models.User;
 import iandrew40.easycooking.data.repositories.IngredientRepository;
 import iandrew40.easycooking.data.repositories.RecipeRepository;
+import iandrew40.easycooking.data.repositories.UserRepository;
 import iandrew40.easycooking.service.models.recipe.RecipeCreateServiceModel;
 import iandrew40.easycooking.service.models.recipe.RecipeViewServiceModel;
 import iandrew40.easycooking.service.services._shared.DateService;
+import iandrew40.easycooking.service.services.user.UserService;
 import iandrew40.easycooking.web.models.recipe.RecipeCreateModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +24,18 @@ public class RecipeCreateServiceImpl implements RecipeCreateService {
     private final ModelMapper modelMapper;
     private final RecipeRepository recipeRepository;
     private final IngredientRepository ingredientRepository;
+    private final UserRepository userRepository;
+    private final UserService userService;
     private final DateService dateService;
 
 
     @Autowired
-    public RecipeCreateServiceImpl(ModelMapper modelMapper, RecipeRepository recipeRepository, IngredientRepository ingredientRepository, DateService dateService) {
+    public RecipeCreateServiceImpl(ModelMapper modelMapper, RecipeRepository recipeRepository, IngredientRepository ingredientRepository, UserRepository userRepository, UserService userService, DateService dateService) {
         this.modelMapper = modelMapper;
         this.recipeRepository = recipeRepository;
         this.ingredientRepository = ingredientRepository;
+        this.userRepository = userRepository;
+        this.userService = userService;
         this.dateService = dateService;
     }
 
@@ -109,6 +116,10 @@ public class RecipeCreateServiceImpl implements RecipeCreateService {
         Recipe recipe = this.modelMapper.map(recipeCreateServiceModel, Recipe.class);
         recipe.setIngredients(ingredients);
 
+        User user = this.userRepository.findByUsername(recipeCreateServiceModel.getUser());
+        this.userService.addRecipeToUser(user, recipe);
+
+        recipe.setUser(user);
 
         this.recipeRepository.saveAndFlush(recipe);
 
