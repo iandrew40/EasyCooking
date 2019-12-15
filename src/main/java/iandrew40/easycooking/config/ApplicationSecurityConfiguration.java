@@ -25,7 +25,6 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .loginPage("/user/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                //TODO change this to home after creating homeController
                 .defaultSuccessUrl("/")
                 .and()
                 .logout()
