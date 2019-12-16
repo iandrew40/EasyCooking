@@ -2,6 +2,7 @@ package iandrew40.easycooking.web.controllers.user;
 
 import iandrew40.easycooking.service.models.user.UserRegisterServiceModel;
 import iandrew40.easycooking.service.services.user.UserService;
+import iandrew40.easycooking.web.annotations.PageTitle;
 import iandrew40.easycooking.web.models.user.UserLoginModel;
 import iandrew40.easycooking.web.models.user.UserRegisterModel;
 import org.modelmapper.ModelMapper;
@@ -27,6 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/register")
+    @PageTitle("Register")
     public String getRegisterForm(Model model){
         model.addAttribute("model", new UserRegisterModel());
 
@@ -48,6 +50,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
+    @PageTitle("Login")
     public String getLoginForm(Model model){
         model.addAttribute("model", new UserLoginModel());
 

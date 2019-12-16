@@ -1,24 +1,29 @@
 package iandrew40.easycooking.web.controllers.home;
 
+import iandrew40.easycooking.web.annotations.PageTitle;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
 
     @GetMapping("/")
     @PreAuthorize("isAnonymous()")
-    public String getIndex(HttpSession session){
-        return "index.html";
+    @PageTitle("Index")
+    public String getIndex(ModelAndView modelAndView){
+        modelAndView.setViewName("/");
+        return "/index";
     }
 
     @GetMapping("/home")
     @PreAuthorize("isAuthenticated()")
-    public String getHome(){
+    @PageTitle("Home")
+    public ModelAndView getHome(ModelAndView modelAndView){
 
-        return "/home";
+        modelAndView.setViewName("/home");
+        return modelAndView;
     }
 }

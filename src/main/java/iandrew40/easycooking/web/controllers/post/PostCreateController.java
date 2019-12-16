@@ -2,6 +2,7 @@ package iandrew40.easycooking.web.controllers.post;
 
 import iandrew40.easycooking.service.models.post.PostCreateServiceModel;
 import iandrew40.easycooking.service.services.post.PostCreateService;
+import iandrew40.easycooking.web.annotations.PageTitle;
 import iandrew40.easycooking.web.models.post.PostCreateModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class PostCreateController {
     }
 
     @GetMapping("/create-post")
+    @PageTitle("Create Post")
     public String getCreatePost(Model model){
         model.addAttribute("model", new PostCreateModel());
 

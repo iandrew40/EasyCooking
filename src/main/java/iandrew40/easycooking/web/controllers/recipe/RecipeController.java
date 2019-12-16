@@ -3,10 +3,12 @@ package iandrew40.easycooking.web.controllers.recipe;
 import iandrew40.easycooking.service.models.recipe.RecipeCreateServiceModel;
 import iandrew40.easycooking.service.models.recipe.RecipeViewServiceModel;
 import iandrew40.easycooking.service.services.recipe.RecipeCreateService;
+import iandrew40.easycooking.web.annotations.PageTitle;
 import iandrew40.easycooking.web.models.recipe.RecipeCreateModel;
 import iandrew40.easycooking.web.models.recipe.RecipeViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -46,6 +48,8 @@ public class RecipeController {
 
 
     @GetMapping("/create-recipe")
+    @PageTitle("Create recipe")
+    @PreAuthorize("isAuthenticated()")
     public String getCreateRecipe(Model model){
         model.addAttribute("model", new RecipeCreateModel());
 
