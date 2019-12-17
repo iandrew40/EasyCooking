@@ -33,40 +33,37 @@ public class RecipeController {
     }
 
 
-    @GetMapping("/details/{recipe}")
-    public ModelAndView getViewRecipe(@PathVariable String recipe, ModelAndView modelAndView){
-        RecipeViewServiceModel recipeServiceModel = this.recipeCreateService.getRecipeByName(recipe);
-
-        RecipeViewModel recipeViewModel = this.modelMapper
-                .map(recipeServiceModel, RecipeViewModel.class);
-        modelAndView.addObject("recipe", recipeViewModel);
-        modelAndView.setViewName("recipe/view-recipe.html");
-
-        return modelAndView;
-    }
-
+//    @GetMapping("/details/{recipe}")
+//    public ModelAndView getViewRecipe(@PathVariable String recipe, ModelAndView modelAndView) {
+//        RecipeViewServiceModel recipeServiceModel = this.recipeCreateService.getRecipeByName(recipe);
+//
+//        RecipeViewModel recipeViewModel = this.modelMapper
+//                .map(recipeServiceModel, RecipeViewModel.class);
+//        modelAndView.addObject("recipe", recipeViewModel);
+//        modelAndView.setViewName("recipe/view-recipe.html");
+//
+//        return modelAndView;
+//    }
 
 
     @GetMapping("/create-recipe")
     @PageTitle("Create recipe")
     @PreAuthorize("isAuthenticated()")
-    public String getCreateRecipe(Model model){
+    public String getCreateRecipe(Model model) {
         model.addAttribute("model", new RecipeCreateModel());
 
         return "recipe/create-recipe.html";
     }
 
     @PostMapping("/create-recipe")
-    public String createRecipe(@ModelAttribute RecipeCreateModel recipeCreateModel, HttpServletRequest request){
-
-
+    public String createRecipe(@ModelAttribute RecipeCreateModel recipeCreateModel, HttpServletRequest request) {
 
 
         RecipeCreateServiceModel recipeCreateServiceModel = this.modelMapper
                 .map(recipeCreateModel, RecipeCreateServiceModel.class);
 
         recipeCreateServiceModel.setIngredients(this.recipeCreateService
-                        .addIngredientsToListAndRemoveEmptyEntries(recipeCreateModel));
+                .addIngredientsToListAndRemoveEmptyEntries(recipeCreateModel));
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
@@ -75,6 +72,19 @@ public class RecipeController {
 
         recipeCreateService.create(recipeCreateServiceModel);
 
-        return "redirect:/";
+        return "redirect:/home";
     }
+
+    @GetMapping("/details/{id}")
+    @PageTitle("Recipe Details")
+    @PreAuthorize("isAuthenticated()")
+    public ModelAndView recipeDetails(@PathVariable String id, ModelAndView modelAndView) {
+        RecipeViewServiceModel serviceViewModel = this.recipeCreateService.findById(id);
+
+        RecipeViewModel recipeViewModel = this.modelMapper.map(serviceViewModel, RecipeViewModel.class);
+        modelAndView.addObject("recipe", recipeViewModel);
+        modelAndView.setViewName("recipe/view-recipe.html");
+        return modelAndView;
+    }
+
 }

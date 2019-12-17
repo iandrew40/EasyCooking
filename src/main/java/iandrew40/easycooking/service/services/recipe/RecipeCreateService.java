@@ -12,8 +12,10 @@ public interface RecipeCreateService {
 
     RecipeViewServiceModel getRecipeByName(String name);
 
-
     //Adding the strings from the RecipeViewModel to list and removing the empty ones
     List<String> addIngredientsToListAndRemoveEmptyEntries(RecipeCreateModel model);
 
+    List<RecipeViewServiceModel> findAllRecipes();
+
+    RecipeViewServiceModel findById(String id);
 }

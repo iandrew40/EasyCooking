@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class RecipeCreateServiceImpl implements RecipeCreateService {
@@ -66,8 +68,8 @@ public class RecipeCreateServiceImpl implements RecipeCreateService {
 
         //Here we remove all empty fields from ingredients list.
         for (int i = 19; i >= 0; i--) {
-            if (ingredients.get(i).equals("")){
-            ingredients.remove(i);
+            if (ingredients.get(i).equals("")) {
+                ingredients.remove(i);
             }
         }
 
@@ -125,4 +127,26 @@ public class RecipeCreateServiceImpl implements RecipeCreateService {
 
     }
 
+    @Override
+    public List<RecipeViewServiceModel> findAllRecipes() {
+        List<RecipeViewServiceModel> recipes = this.recipeRepository.findAll()
+                .stream().map(r -> this.modelMapper.map(r, RecipeViewServiceModel.class))
+                .collect(Collectors.toList());
+
+        return recipes;
+    }
+
+    @Override
+    public RecipeViewServiceModel findById(String id) {
+        Optional<Recipe> recipe = this.recipeRepository.findById(id);
+
+        if (recipe.isEmpty()) {
+            System.out.println("no recipe found");
+            return null;
+
+        } else {
+            RecipeViewServiceModel serviceViewModel = this.modelMapper.map(recipe, RecipeViewServiceModel.class);
+            return serviceViewModel;
+        }
+    }
 }

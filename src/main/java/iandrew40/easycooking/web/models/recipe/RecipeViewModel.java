@@ -1,11 +1,12 @@
 package iandrew40.easycooking.web.models.recipe;
 
 import iandrew40.easycooking.data.models.Ingredient;
+import iandrew40.easycooking.web.models.BaseViewModel;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class RecipeViewModel {
+public class RecipeViewModel extends BaseViewModel {
 
     private String name;
     private Integer views;

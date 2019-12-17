@@ -14,6 +14,8 @@ public interface RecipeRepository extends JpaRepository<Recipe, String> {
 
     List<Recipe> findAllByCategory(String categoryName);
 
+    List<Recipe> findAll();
+
     Recipe getByName(String name);
 
 }

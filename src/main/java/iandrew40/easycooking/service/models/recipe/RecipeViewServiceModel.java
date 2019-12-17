@@ -1,11 +1,12 @@
 package iandrew40.easycooking.service.models.recipe;
 
 import iandrew40.easycooking.data.models.Ingredient;
+import iandrew40.easycooking.service.models.BaseServiceModel;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class RecipeViewServiceModel {
+public class RecipeViewServiceModel extends BaseServiceModel {
 
     private String name;
     private String category;

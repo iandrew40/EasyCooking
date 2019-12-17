@@ -1,7 +1,24 @@
 <html lang="en">
 <th:block th:include="~{_shared/head.html}"/>
-    <body>
-    <th:block th:include="~{_shared/header.html}"/>
+<body>
+<th:block th:include="~{_shared/header.html}"/>
 <h1 class="text-center text-info-50">HOME SUCCESS</h1>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <th:block th:each="recipe : ${recipes}">
+            <div class="card col-xl-3 col-md-5 col-sm-12" style="width: 18rem;">
+                <img class="card-img-top mt-3" src="/image/pizza.jpeg" alt="Recipe Image">
+                <div class="card-body">
+                    <h4 class="card-title text-center" th:text="${recipe.name}"></h4>
+                    <p class="card-text" th:text="${recipe.howToPrepare}"></p>
+                    <p class="card-text" th:text="${recipe.views}"></p>
+                    <p class="card-text" th:text="${recipe.dateAdded}"></p>
+                    <a th:href="@{/recipe/details/{id}(id=${recipe.id})}" class="justify-content-center btn btn-info">Details</a>
+                </div>
+            </div>
+        </th:block>
+    </div>
+</div>
+
 </body>
 </html>

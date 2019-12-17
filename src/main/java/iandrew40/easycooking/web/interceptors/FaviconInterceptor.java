@@ -14,7 +14,7 @@ public class FaviconInterceptor extends HandlerInterceptorAdapter {
     public void postHandle(HttpServletRequest request, HttpServletResponse response,
                            Object handler, ModelAndView modelAndView){
 
-        String faviconURL = "https://github.com/iandrew40/EasyCooking/blob/master/src/main/resources/static/image/logo-orange.png?raw=true";
+        String faviconURL = "https://github.com/iandrew40/EasyCooking/blob/master/src/main/resources/static/image/logo-green.png?raw=true";
 
 
         if (modelAndView != null){
