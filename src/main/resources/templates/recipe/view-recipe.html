@@ -29,15 +29,17 @@
                            src="/image/love-button.png"/>
                 </div>
             </div>
-            <div class="col-sm-12 col-xl-6">
-                <h2 class="text-center col-xl-10">Ingredients:</h2>
-                <ol class="col-xl-10" id="ingredientsList">
-                    <tr th:each="ingredient: ${recipe.ingredients}">
-                        <li>
-                            <td th:text="${ingredient.name}"/>
-                        </li>
-                </ol>
-            </div>
+            <th:block>
+                <div class="col-sm-12 col-xl-6">
+                    <h2 class="text-center col-xl-10">Ingredients:</h2>
+                    <ol class="col-xl-10" id="ingredientsList">
+                        <tr th:each="ingredient : ${ingredients}">
+                            <li>
+                                <p th:text="${ingredient.name}"></p>
+                            </li>
+                    </ol>
+                </div>
+            </th:block>
         </div>
         <!----------------------------------------------------------->
         <div class="row">

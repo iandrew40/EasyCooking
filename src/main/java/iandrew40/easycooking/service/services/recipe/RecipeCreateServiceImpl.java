@@ -138,13 +138,14 @@ public class RecipeCreateServiceImpl implements RecipeCreateService {
 
     @Override
     public RecipeViewServiceModel findById(String id) {
-        Optional<Recipe> recipe = this.recipeRepository.findById(id);
+        Optional<Recipe> tempRecipe = this.recipeRepository.findById(id);
 
-        if (recipe.isEmpty()) {
+        if (tempRecipe.isEmpty()) {
             System.out.println("no recipe found");
             return null;
 
         } else {
+            Recipe recipe = tempRecipe.get();
             RecipeViewServiceModel serviceViewModel = this.modelMapper.map(recipe, RecipeViewServiceModel.class);
             return serviceViewModel;
         }

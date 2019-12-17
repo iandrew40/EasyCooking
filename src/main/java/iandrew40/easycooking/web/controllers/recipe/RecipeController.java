@@ -1,5 +1,6 @@
 package iandrew40.easycooking.web.controllers.recipe;
 
+import iandrew40.easycooking.data.models.Ingredient;
 import iandrew40.easycooking.service.models.recipe.RecipeCreateServiceModel;
 import iandrew40.easycooking.service.models.recipe.RecipeViewServiceModel;
 import iandrew40.easycooking.service.services.recipe.RecipeCreateService;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -82,7 +85,13 @@ public class RecipeController {
         RecipeViewServiceModel serviceViewModel = this.recipeCreateService.findById(id);
 
         RecipeViewModel recipeViewModel = this.modelMapper.map(serviceViewModel, RecipeViewModel.class);
+
+        List<Ingredient> ingredients = new ArrayList<>();
+        ingredients.addAll(recipeViewModel.getIngredients());
+
         modelAndView.addObject("recipe", recipeViewModel);
+        modelAndView.addObject("ingredients", ingredients);
+
         modelAndView.setViewName("recipe/view-recipe.html");
         return modelAndView;
     }
